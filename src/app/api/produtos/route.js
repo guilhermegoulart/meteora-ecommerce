@@ -3,6 +3,6 @@ import { getTodosProdutos } from "@/lib/api";
 
 export async function GET() {
   const produtos = getTodosProdutos();
-  
-  return NextResponse.json({produtos});
+
+  return NextResponse.json({ produtos });
 }

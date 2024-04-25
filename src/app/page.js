@@ -1,7 +1,6 @@
 import styles from "./page.module.css";
 import { Categorias } from "./components/Categorias";
 import { Produtos } from "./components/Produtos";
-import { getCategorias, getTodosProdutos } from "../lib/api";
 
 async function fetchProdutosApi() {
   const res = await fetch("http://localhost:3000/api/produtos");
@@ -14,9 +13,21 @@ async function fetchProdutosApi() {
   return produtos;
 } 
 
+async function fetchCategoriasApi() {
+  const res = await fetch("http://localhost:3000/api/categorias");
+  if (!res.ok) {
+    throw new Error ("Não foi possivel fazer o fetch de dados")
+  }
+
+  const categorias = await res.json();
+
+  return categorias;
+} 
+
 export default async function Home() {
   const { produtos } = await fetchProdutosApi();
-  const categorias = getCategorias();
+  
+  const { categorias } = await fetchCategoriasApi();
 
   return (
     <>
